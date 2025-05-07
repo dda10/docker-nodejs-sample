@@ -6,20 +6,23 @@ terraform {
       project = "docker-nodejs-sample"
       name = "docker-nodejs-sample"
     }
-
   }
 }
 
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
 
 resource "google_compute_network" "default" {
-  name = "example-network"
-
+  name                    = "network"
+  project                 = var.project_id
   auto_create_subnetworks  = false
   enable_ula_internal_ipv6 = true
 }
 
 resource "google_compute_subnetwork" "default" {
-  name = "example-subnetwork"
+  name = "subnetwork"
 
   ip_cidr_range = "10.0.0.0/16"
   region        = "us-central1"
@@ -40,7 +43,7 @@ resource "google_compute_subnetwork" "default" {
 }
 
 resource "google_container_cluster" "default" {
-  name = "example-autopilot-cluster"
+  name = "autopilot-cluster"
 
   location                 = "us-central1"
   enable_autopilot         = true
