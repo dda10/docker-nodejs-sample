@@ -47,7 +47,7 @@ resource "google_container_cluster" "default" {
     enable_private_endpoint = true
   }
   ip_allocation_policy {
-    stack_type                    = "IPV4_ONLY"
+    stack_type                    = "IPV4"
     services_secondary_range_name = google_compute_subnetwork.default.secondary_ip_range[0].range_name
     cluster_secondary_range_name  = google_compute_subnetwork.default.secondary_ip_range[1].range_name
   }
