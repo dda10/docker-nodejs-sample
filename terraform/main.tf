@@ -1,19 +1,3 @@
-terraform {
-  cloud {
-    organization = "anhdd01"
-    
-    workspaces {
-      project = "docker-nodejs-sample"
-      name = "docker-nodejs-sample"
-    }
-  }
-}
-
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
 resource "google_compute_network" "default" {
   name                    = "network"
   project                 = var.project_id
@@ -27,8 +11,14 @@ resource "google_compute_subnetwork" "default" {
   ip_cidr_range = "10.0.0.0/16"
   region        = "us-central1"
 
-  stack_type       = "IPV4_IPV6"
-  ipv6_access_type = "INTERNAL" # Change to "EXTERNAL" if creating an external loadbalancer
+  stack_type       = "IPV4_ONLY"
+  ipv6_access_type = "INTERNAL"     
+
+  log_config {
+    aggregation_interval = "INTERVAL_5_SEC"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+  }
 
   network = google_compute_network.default.id
   secondary_ip_range {
@@ -51,9 +41,13 @@ resource "google_container_cluster" "default" {
 
   network    = google_compute_network.default.id
   subnetwork = google_compute_subnetwork.default.id
-
+  
+  private_cluster_config {
+    enable_private_nodes = true
+    enable_private_endpoint = true
+  }
   ip_allocation_policy {
-    stack_type                    = "IPV4_IPV6"
+    stack_type                    = "IPV4_ONLY"
     services_secondary_range_name = google_compute_subnetwork.default.secondary_ip_range[0].range_name
     cluster_secondary_range_name  = google_compute_subnetwork.default.secondary_ip_range[1].range_name
   }
