@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: 'actions/checkout@v4'
 
     # Use if want to push to Docker Hub
       # - name: Login to Docker Hub
@@ -52,10 +52,10 @@ jobs:
     # Use if want to push to Google Artifact Registry
       - id: 'auth'
         name: 'Obtain access token by using workload identity federation'
-        uses: 'google-github-actions/auth@v0'
+        uses: 'google-github-actions/auth@v2'
         with:
-          create_credentials_file: true
-          token_format: access_token
+          # create_credentials_file: true
+          # token_format: access_token
           workload_identity_provider: projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc
           service_account: github-actions-workflow@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
 
@@ -64,7 +64,7 @@ jobs:
           echo ${{ steps.auth.outputs.access_token }} | docker login -u oauth2accesstoken --password-stdin https://${{ env.REPOSITORY_LOCATION }}-docker.pkg.dev
 
       - name: Connect to GKE
-        uses: google-github-actions/get-gke-credentials@v0
+        uses: google-github-actions/get-gke-credentials@v2
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
@@ -86,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 'Set up Kustomize'
         run: |-
