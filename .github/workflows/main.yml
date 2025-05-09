@@ -57,8 +57,8 @@ jobs:
         id: 'auth'
         uses: 'google-github-actions/auth@v2'
         with:
-          create_credentials_file: false
-          token_format: access_token
+          # create_credentials_file: false
+          # token_format: access_token
           workload_identity_provider: projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc
           service_account: github-actions-workflow@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
 
