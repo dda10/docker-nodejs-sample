@@ -16,6 +16,7 @@ env:
   REPOSITORY_REGION: us-central1
   IMAGE: nodejs-app
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
 
 jobs:
   build:
@@ -58,6 +59,7 @@ jobs:
         uses: 'google-github-actions/auth@v2'
         with:
           workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }} 
           project_id: ${{ env.PROJECT_ID }}
 
       - name: Login to Google Artifact Registry (GAR)
