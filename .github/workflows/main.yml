@@ -16,7 +16,6 @@ env:
   REPOSITORY_REGION: us-central1
   IMAGE: nodejs-app
   WORKLOAD_IDENTITY_PROVIDER: ${{ vars.WORKLOAD_IDENTITY_PROVIDER }}
-  #projects/987121777525/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc
 
 jobs:
   build:
