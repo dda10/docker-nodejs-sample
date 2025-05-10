@@ -12,7 +12,7 @@ resource "google_compute_subnetwork" "default" {
   region        = "us-central1"
 
   stack_type       = "IPV4_ONLY"
-  ipv6_access_type = "INTERNAL"     
+  # ipv6_access_type = "INTERNAL"     
 
   log_config {
     aggregation_interval = "INTERVAL_5_SEC"
