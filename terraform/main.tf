@@ -42,10 +42,10 @@ resource "google_container_cluster" "default" {
   network    = google_compute_network.default.id
   subnetwork = google_compute_subnetwork.default.id
   
-  # private_cluster_config {
-  #   enable_private_nodes = true
-  #   enable_private_endpoint = true
-  # }
+  private_cluster_config {
+    enable_private_nodes    = true
+    enable_private_endpoint = true
+  }
   
   ip_allocation_policy {
     stack_type                    = "IPV4"
