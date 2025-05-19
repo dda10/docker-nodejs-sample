@@ -1,3 +1,4 @@
+# Create GKE
 resource "google_compute_network" "default" {
   name                    = "network"
   project                 = var.project_id
@@ -44,7 +45,7 @@ resource "google_container_cluster" "default" {
   
   private_cluster_config {
     enable_private_nodes    = true
-    enable_private_endpoint = true
+    # enable_private_endpoint = true
   }
   
   ip_allocation_policy {
