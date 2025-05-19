@@ -67,11 +67,9 @@ jobs:
           password: '${{ steps.auth.outputs.auth_token }}'
           registry: '${{ env.GAR_LOCATION }}-docker.pkg.dev'
       
-      - name: Echo Cred
+      - name: Echo Temp Cred
         run: |-
-          echo "${{ env.GOOGLE_APPLICATION_CREDENTIALS}}"
-          echo "${{ steps.auth.outputs.access_token }}"
-      
+          cat "${{ env.GOOGLE_APPLICATION_CREDENTIALS}}"      
       - name: Get GKE Credentials
         uses: google-github-actions/get-gke-credentials@v2
         with:
