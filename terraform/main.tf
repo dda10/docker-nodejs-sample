@@ -10,7 +10,7 @@ resource "google_compute_subnetwork" "default" {
   name = "subnetwork"
 
   ip_cidr_range = "10.0.0.0/16"
-  region        = "us-central1"
+  region        = var.region
 
   stack_type       = "IPV4_ONLY"
   # ipv6_access_type = "INTERNAL"     
@@ -63,9 +63,9 @@ resource "google_container_cluster" "default" {
 
 # [Create Artifact Registry]
 resource "google_artifact_registry_repository" "default" {
-  name     = "clouddemo"
-  location = "us-central1"
+  location = var.region
   format   = "DOCKER"
   repository_id = "clouddemo"
+  description   = "Github docker repository"
 }
 # [END create_artifact_registry ]
