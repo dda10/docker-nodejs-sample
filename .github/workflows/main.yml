@@ -26,6 +26,9 @@ jobs:
     steps:
       - name: Checkout
         uses: 'actions/checkout@v4'
+      
+      - name: Stop Buildx
+        run: docker buildx stop
 
     # Use if want to push to Google Artifact Registry
       - id: 'auth'
@@ -38,11 +41,14 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
 
-      - name: "Use gcloud CLI"
-        run: "gcloud info"
+      - name: "gcloud auth list" # ***Add this for troubleshooting***
+        run: gcloud auth list
 
       - name: Configure Docker with gcloud
         run: gcloud auth configure-docker ${{ env.GAR_LOCATION }}-docker.pkg.dev --quiet
+      
+      - name: Check Docker authentication # ***Add this for troubleshooting***
+        run: docker info
 
       # - name: Login to Google Artifact Registry (GAR)
       #   uses: docker/login-action@v3
