@@ -59,3 +59,13 @@ resource "google_container_cluster" "default" {
   deletion_protection = false
 }
 # [END gke_quickstart_autopilot_cluster]
+
+
+# [Create Artifact Registry]
+resource "google_artifact_registry_repository" "default" {
+  name     = "clouddemo"
+  location = "us-central1"
+  format   = "DOCKER"
+  repository_id = "clouddemo"
+}
+# [END create_artifact_registry ]
