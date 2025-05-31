@@ -4,7 +4,9 @@ This repository is a sample Node.js application for Docker's documentation.
 
 [Project Link on roadmap.sh](https://roadmap.sh/projects/dockerized-service-deployment)
 
-
+Ref: 
+[google-github-actions/auth](https://github.com/google-github-actions/auth/tree/v2/?tab=readme-ov-file#indirect-wif)
+[google-github-actions/deploy-gke](https://github.com/google-github-actions/deploy-gke/tree/v0.0.3/)
 
 # Setup step
 ![Authenticate to Google Cloud from GitHub Actions with Workload Identity Federation through a Service Account](https://github.com/google-github-actions/auth/raw/v2/docs/google-github-actions-auth-workload-identity-federation-through-service-account.svg)
@@ -135,11 +137,3 @@ These instructions use the [gcloud][gcloud] command-line tool.
       --member="serviceAccount:my-service-account@${PROJECT_ID}.iam.gserviceaccount.com"
     ```
 </details>
-
-
-<a name="sake" id="sake"></a>
-### Service Account Key JSON
-
-In this setup, a Service Account has direct IAM permissions on Google Cloud
-resources. You download a Service Account Key JSON file and upload it to GitHub
-as a secret.

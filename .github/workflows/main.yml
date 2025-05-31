@@ -92,8 +92,7 @@ jobs:
           project_id: '${{ env.PROJECT_ID }}'
           namespace: 'myapp'
           expose: '3000'
-          k8s_manifests: 'configs'
-    
+          
       - name: 'get-deployments'
         shell: bash
         run: |

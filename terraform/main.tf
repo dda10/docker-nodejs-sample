@@ -69,3 +69,4 @@ resource "google_artifact_registry_repository" "default" {
   description   = "Github docker repository"
 }
 # [END create_artifact_registry ]
+
