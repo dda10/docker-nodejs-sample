@@ -9,7 +9,7 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
   workload_identity_pool_provider_id = "my-repo"
   display_name                       = "My GitHub repo Provider"
   description                        = "GitHub Actions identity pool provider for automated test"
-  disabled                           = true
+  disabled                           = false
   attribute_condition = <<EOT
     assertion.repository_owner == "dda10" &&
     attribute.repository == "dda10/docker-nodejs-sample" &&
