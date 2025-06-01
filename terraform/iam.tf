@@ -39,10 +39,11 @@ resource "google_service_account" "github_service_account" {
 # [END create_iam_service_account]
 
 # [Create IAM Role Binding]
-resource "google_iam_policy_binding" "github_policy_binding" {
-  role = "roles/iam.workloadIdentityUser"
-  members = [
-    "principalSet://iam.googleapis.com/projects/${var.project_id}/locations/${var.region}/workloadIdentityPools/github/attribute.repository/dda10/docker-nodejs-sample"
+resource "google_service_account_iam_binding" "github_workload_identity_binding" {
+  service_account_id = google_service_account.github_service_account.name
+  role              = "roles/iam.workloadIdentityUser"
+  members           = [
+    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_pool.name}/attribute.repository/dda10/docker-nodejs-sample"
   ]
 }
 
