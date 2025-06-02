@@ -11,15 +11,11 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
   description                        = "GitHub Actions identity pool provider for automated test"
   disabled                           = false
   attribute_condition = <<EOT
-    assertion.repository_owner == "dda10" &&
-    attribute.repository == "dda10/docker-nodejs-sample" &&
-    assertion.ref == "refs/heads/main" &&
-    assertion.ref_type == "branch"
+    assertion.repository_owner == "dda10"
   EOT
   attribute_mapping = {
     "google.subject"       = "assertion.sub"
     "attribute.actor"      = "assertion.actor"
-    "attribute.aud"        = "assertion.aud"
     "attribute.repository" = "assertion.repository"
     "attribute.repository_owner" = "assertion.repository_owner"
   }
@@ -53,7 +49,7 @@ resource "google_project_iam_member" "github_actions_roles" {
     "roles/container.developer",
     "roles/artifactregistry.writer",
     "roles/iam.serviceAccountTokenCreator",
-    # "roles/iam.workloadIdentityUser",
+    "roles/iam.workloadIdentityUser",
     # Add more roles here as needed
   ])
 
