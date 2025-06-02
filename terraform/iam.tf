@@ -1,11 +1,11 @@
 # [Create Workload Identity Federation]
-resource "google_iam_workload_identity_pool" "github_pool" {
+resource "google_iam_workload_identity_pool" "github" {
   workload_identity_pool_id = "github"
   display_name = "Github Actions Pool"
 }
 
 resource "google_iam_workload_identity_pool_provider" "github_provider" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.github_pool.workload_identity_pool_id
+  workload_identity_pool_id          = google_iam_workload_identity_pool.github.workload_identity_pool_id
   workload_identity_pool_provider_id = "my-repo"
   display_name                       = "My GitHub repo Provider"
   description                        = "GitHub Actions identity pool provider for automated test"
@@ -32,8 +32,8 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
 
 # [Create IAM Service Account]
 resource "google_service_account" "github_service_account" {
-  account_id = "github-actions-workflow"
-  display_name = "GitHub Actions workflow Service Account"
+  account_id = "github-actions"
+  display_name = "GitHub Actions Service Account"
 }
 
 # [END create_iam_service_account]
@@ -43,7 +43,7 @@ resource "google_service_account_iam_binding" "github_workload_identity_binding"
   service_account_id = google_service_account.github_service_account.name
   role              = "roles/iam.workloadIdentityUser"
   members           = [
-    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_pool.name}/attribute.repository/dda10/docker-nodejs-sample"
+    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/dda10/docker-nodejs-sample"
   ]
 }
 
