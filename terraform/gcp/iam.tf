@@ -1,6 +1,6 @@
 # [Create Workload Identity Federation]
 resource "google_iam_workload_identity_pool" "github_pool" {
-  workload_identity_pool_id = "github-pool"
+  workload_identity_pool_id = "github-action-pool"
   display_name = "Github Actions Pool"
 }
 
